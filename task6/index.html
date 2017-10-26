@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>task5</title>
+		<style>
+			li {
+				display: inline-block;
+				width: 40px;
+				height: 0;
+				text-align: center;
+				font-size: 20px;
+				background: red;
+				color: #fff;
+				margin: 0 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="text" id="txt" />
+		<button id="l-in">左侧入</button>
+		<button id="l-out">左侧出</button>
+		<button id="r-in">右侧入</button>
+		<button id="r-out">右侧出</button>
+		<ul id="list">
+			<!--<li>1</li>-->
+		</ul>
+		<script type="text/javascript">
+			var list = document.getElementById('list');
+			var num = 0;
+			//重获焦点
+			function txtFoucs() {
+				var txt = document.getElementById('txt');
+				txt.value = '';
+				txt.focus();
+			}
+			//获取输入框的值
+			function getTxt(){
+				var txt = document.getElementById('txt');
+				var v = txt.value;
+				return v;
+			}
+			
+			//左边入
+			var lIN = document.getElementById('l-in');
+			lIN.onclick = function(){
+				if (num <60) {
+					num++;
+					var v = getTxt();
+					if (v != "") {
+						var li = document.createElement("li");
+						li.onclick = function(){
+							list.removeChild(this);
+							num--;
+						}
+						li.innerHTML = v;
+						list.insertBefore(li,list.children[0]);
+					}
+					txtFoucs()
+				}
+			}
+//			左边出
+			var lOut = document.getElementById('l-out');
+			lOut.onclick = function(){
+				num--;
+				if (list.children.length != 0) {
+					var num = list.children[0].innerHTML;
+					list.removeChild(list.children[0]);
+					alert(num);
+				}
+				txtFoucs()
+			}
+//			右边入
+			var rIN = document.getElementById('r-in');
+			rIN.onclick = function(){
+				if (num <60) {
+					num++;
+					var v = getTxt();
+					if (v != "") {
+						var li = document.createElement("li");
+						li.onclick = function(){
+							list.removeChild(this);
+							num--;
+						}
+						li.innerHTML = v;
+						list.appendChild(li);
+					}
+					txtFoucs()
+				}
+			}
+//			右边出
+			var rOut = document.getElementById('r-out');
+			rOut.onclick = function(){
+				num--;
+				if (list.children.length != 0) {
+					var num = list.lastChild.innerHTML;
+					list.removeChild(list.lastChild);
+					alert(num);
+				}
+				txtFoucs()
+			}
+		</script>
+	</body>
+</html>
