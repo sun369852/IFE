@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>task5</title>
+		<style>
+			li {
+				display: inline-block;
+				width: 40px;
+				height: 40px;
+				text-align: center;
+				font: 20px/40px "微软雅黑";
+				background: red;
+				color: #fff;
+				margin: 0 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="text" id="txt" />
+		<button id="l-in">左侧入</button>
+		<button id="l-out">左侧出</button>
+		<button id="r-in">右侧入</button>
+		<button id="r-out">右侧出</button>
+		<ul id="list">
+			<!--<li>1</li>-->
+		</ul>
+		<script type="text/javascript">
+			var list = document.getElementById('list');
+			var txt = document.getElementById('txt');
+			function getTxt(){
+				var txt = document.getElementById('txt');
+				var v = txt.value;
+				return v;
+			}
+			var lIN = document.getElementById('l-in');
+			lIN.onclick = function(){
+				var v = getTxt();
+				if (v != "") {
+					var li = document.createElement("li");
+					li.onclick = function(){
+						list.removeChild(this);
+						
+					}
+					li.innerHTML = v;
+					list.insertBefore(li,list.children[0]);
+				}
+				txt.value = '';
+				txt.focus();
+			}
+			var lOut = document.getElementById('l-out');
+			lOut.onclick = function(){
+				if (list.children.length != 0) {
+					var num = list.children[0].innerHTML;
+					list.removeChild(list.children[0]);
+					alert(num);
+				}
+				txt.value = '';
+				txt.focus();
+			}
+			var rIN = document.getElementById('r-in');
+			rIN.onclick = function(){
+				var v = getTxt();
+				if (v != "") {
+					var li = document.createElement("li");
+					li.onclick = function(){
+						list.removeChild(this);
+					}
+					li.innerHTML = v;
+					list.appendChild(li);
+				}
+				txt.value = '';
+				txt.focus();
+			}
+			var rOut = document.getElementById('r-out');
+			rOut.onclick = function(){
+				if (list.children.length != 0) {
+					var num = list.lastChild.innerHTML;
+					list.removeChild(list.lastChild);
+					alert(num);
+				}
+				txt.value = '';
+				txt.focus();
+			}
+		</script>
+	</body>
+</html>
